@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".KotlinSecondScreen">
+    tools:context=".SecondScreen.KotlinSecondScreen">
 
     <ImageView
         android:id="@+id/imageView"
@@ -17,7 +17,7 @@
         tools:src="@tools:sample/avatars" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -26,6 +26,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
+        android:hint="Enter comment here"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
