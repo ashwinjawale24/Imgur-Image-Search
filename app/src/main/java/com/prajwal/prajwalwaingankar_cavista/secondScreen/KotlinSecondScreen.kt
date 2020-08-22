@@ -15,16 +15,18 @@ class KotlinSecondScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kotlinsecondscreen)
 
-        val position: Int = intent.extras?.getInt("id") ?: 1
+        val url: String = intent.extras?.getString("url") ?: ""
         val image: ImageView = findViewById(R.id.imageView)
         val editText: EditText = findViewById(R.id.editTextComment)
         val button: Button = findViewById(R.id.button)
 //        val imageAdapter = ImageAdapter(this, imageUrlsList)
 //
-//        val uri = Uri.parse()
-//        Glide.with(context).load(uri).asBitmap().into(imageView)
+        val uri = Uri.parse(url)
+        Glide.with(this).load(uri).asBitmap().into(image)
 //
 //        image.setImageResource(imageAdapter.imageIds[position])
+
+
 
     }
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +21,9 @@ import com.prajwal.prajwalwaingankar_cavista.secondScreen.KotlinSecondScreen;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -31,11 +34,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    static GridView gridView;
+    GridView gridView;
     SearchView searchView;
-    static ApiInterface apiInterface;
-    static List<String> imageUrlsList;
-    static Context context;
+    ApiInterface apiInterface;
+    List<String> imageUrlsList;
+    Context context;
+    Map<Integer, String> map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         gridView = findViewById(R.id.gridView);
         searchView = findViewById(R.id.searchView);
         context = MainActivity.this;
+        map = new HashMap<>();
 
         getApiInterface();
 
@@ -53,13 +58,13 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent i = new Intent(getApplicationContext(), KotlinSecondScreen.class);
-                i.putExtra("id", position);
+                i.putExtra("url", map.get(position));
                 startActivity(i);
             }
         });
     }
 
-    public static ApiInterface getApiInterface()
+    public ApiInterface getApiInterface()
     {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         final Observable<SearchResponse> observable =
@@ -75,8 +80,9 @@ public class MainActivity extends AppCompatActivity {
                         imageUrlsList = new ArrayList<>();
                         for (int i = 0; i < searchResponse.getData().size(); i++) {
                             for (int j = 0; j < searchResponse.getData().get(i).getImages().size(); j++) {
-                                imageUrlsList
-                                        .add(i, searchResponse.getData().get(i).getImages().get(j).getLink());
+
+                                imageUrlsList.add(i, searchResponse.getData().get(i).getImages().get(j).getLink());
+                                map.put(i, searchResponse.getData().get(i).getImages().get(j).getLink());
 
                             }
 
@@ -84,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
                         gridView.setAdapter(new ImageAdapter(context, imageUrlsList));
                         Log.d("praj", String.valueOf(imageUrlsList.size()));
+                        Log.d("praj13", String.valueOf(map.size()));
                     }
 
                     @Override
