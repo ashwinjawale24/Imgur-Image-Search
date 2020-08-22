@@ -1,11 +1,11 @@
-package com.prajwal.prajwalwaingankar_cavista.SecondScreen
+package com.prajwal.prajwalwaingankar_cavista.secondScreen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import com.prajwal.prajwalwaingankar_cavista.FirstScreen.ImageAdapter
+import com.prajwal.prajwalwaingankar_cavista.firstScreen.ImageAdapter
 import com.prajwal.prajwalwaingankar_cavista.R
 
 class KotlinSecondScreen : AppCompatActivity() {

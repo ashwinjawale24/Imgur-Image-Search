@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecondScreen.KotlinSecondScreen">
+    tools:context=".secondScreen.KotlinSecondScreen">
 
     <ImageView
         android:id="@+id/imageView"

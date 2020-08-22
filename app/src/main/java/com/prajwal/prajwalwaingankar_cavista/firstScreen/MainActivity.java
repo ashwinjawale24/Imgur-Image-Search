@@ -1,4 +1,4 @@
-package com.prajwal.prajwalwaingankar_cavista.FirstScreen;
+package com.prajwal.prajwalwaingankar_cavista.firstScreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.prajwal.prajwalwaingankar_cavista.R;
-import com.prajwal.prajwalwaingankar_cavista.SecondScreen.KotlinSecondScreen;
+import com.prajwal.prajwalwaingankar_cavista.secondScreen.KotlinSecondScreen;
 
 public class MainActivity extends AppCompatActivity {
     GridView gridView;

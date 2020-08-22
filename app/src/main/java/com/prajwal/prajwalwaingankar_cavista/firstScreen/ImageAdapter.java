@@ -1,4 +1,4 @@
-package com.prajwal.prajwalwaingankar_cavista.FirstScreen;
+package com.prajwal.prajwalwaingankar_cavista.firstScreen;
 
 import android.content.Context;
 import android.view.View;
