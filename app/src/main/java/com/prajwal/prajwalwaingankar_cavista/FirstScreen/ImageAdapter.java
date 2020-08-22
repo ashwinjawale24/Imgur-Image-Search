@@ -62,9 +62,9 @@ public class ImageAdapter extends BaseAdapter {
 
     public Integer[] imageIds = {
                     R.drawable.test_image,
+                    R.drawable.test_image_2,
                     R.drawable.test_image,
-                    R.drawable.test_image,
-                    R.drawable.test_image,
+                    R.drawable.test_image_2,
                     R.drawable.test_image};
 
 
