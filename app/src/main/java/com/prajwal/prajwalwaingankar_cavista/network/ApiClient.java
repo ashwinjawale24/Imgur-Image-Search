@@ -24,7 +24,7 @@ public class ApiClient {
         if (retrofit == null) {
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl("https://api.imgur.com/3/gallery/search/1") //baseurl for imgur
+                    .baseUrl("https://api.imgur.com/3/gallery/search/") //baseurl for imgur
                     .client(client.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
