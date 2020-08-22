@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     ApiInterface apiInterface;
     List<String> imageUrlsList;
     Context context;
-    Map<Integer, String> map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         gridView = findViewById(R.id.gridView);
         searchView = findViewById(R.id.searchView);
         context = MainActivity.this;
-        map = new HashMap<>();
 
         getApiInterface();
 
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent i = new Intent(getApplicationContext(), KotlinSecondScreen.class);
-                i.putExtra("url", map.get(position));
+                i.putExtra("url", imageUrlsList.get(position));
                 startActivity(i);
             }
         });
@@ -82,15 +80,12 @@ public class MainActivity extends AppCompatActivity {
                             for (int j = 0; j < searchResponse.getData().get(i).getImages().size(); j++) {
 
                                 imageUrlsList.add(i, searchResponse.getData().get(i).getImages().get(j).getLink());
-                                map.put(i, searchResponse.getData().get(i).getImages().get(j).getLink());
-
                             }
 
                         }
 
                         gridView.setAdapter(new ImageAdapter(context, imageUrlsList));
-                        Log.d("praj", String.valueOf(imageUrlsList.size()));
-                        Log.d("praj13", String.valueOf(map.size()));
+                        Log.d("praj31", String.valueOf(imageUrlsList.size()));
                     }
 
                     @Override
