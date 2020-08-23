@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         final Observable<SearchResponse> observable =
-                apiInterface.getSearchImages("fruit", "Client-ID 137cda6b5008a7c");
+                apiInterface.getSearchImages("game", "Client-ID 137cda6b5008a7c");
         observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -74,16 +74,29 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onNext(SearchResponse searchResponse) {
                         Log.d("praj",searchResponse.getData().get(0).getTitle());
-
                         imageUrlsList = new ArrayList<>();
+
                         for (int i = 0; i < searchResponse.getData().size(); i++) {
-                            for (int j = 0; j < searchResponse.getData().get(i).getImages().size(); j++) {
+                            if((searchResponse.getData().get(i).getImages() != null)) {
+                                for (int j = 0; j < searchResponse.getData().get(i).getImages().size(); j++) {
+                                    if(searchResponse.getData().get(i).getImages().get(j).getLink()
+                                            .contains(".jpg") || searchResponse.getData()
+                                            .get(i).getImages().get(j).getLink().contains(".png"))
 
-                                //TODO handle if search word results not found then...
-
-                                imageUrlsList.add(i, searchResponse.getData().get(i).getImages().get(j).getLink());
+                            {
+                                imageUrlsList.add(i, searchResponse.getData().get(i)
+                                        .getImages().get(j).getLink());
                             }
-
+                            else
+                            {
+                                imageUrlsList.add(i, "empty");
+                            }
+                             }
+                            }
+                            else
+                            {
+                                imageUrlsList.add(i, "empty");
+                            }
                         }
 
                         gridView.setAdapter(new ImageAdapter(context, imageUrlsList));
