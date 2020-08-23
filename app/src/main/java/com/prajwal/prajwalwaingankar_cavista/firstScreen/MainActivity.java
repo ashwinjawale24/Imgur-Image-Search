@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
            public boolean onQueryTextSubmit(String query) {
                mquery = query;
                new_request(query);
+               searchView.clearFocus();  //disables the keyboard show up on rotation.
                return false;
            }
 
