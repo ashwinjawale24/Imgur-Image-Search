@@ -10,6 +10,7 @@ import com.prajwal.prajwalwaingankar_cavista.firstScreen.ImageAdapter;
 import com.prajwal.prajwalwaingankar_cavista.model.SearchResponse;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,7 +76,7 @@ public class API_RequestConnection {
 
 
 
-                            imageUrlsList.remove("empty");
+                            imageUrlsList.removeAll(Collections.singleton("empty"));
                             stringMap.put(getMquery(), imageUrlsList);
                             mutableLiveData.setValue(stringMap);
 

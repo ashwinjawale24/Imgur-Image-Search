@@ -68,13 +68,13 @@ public class ImageAdapter extends BaseAdapter {
         return imageView;
     }
 
-    public Integer[] imageIds = {
+  /*  public Integer[] imageIds = {
             //get all images links....and add them in this function & then load then from glide...
                     R.drawable.test_image,
                     R.drawable.test_image_2,
                     R.drawable.test_image,
                     R.drawable.test_image_2,
-                    R.drawable.test_image};
+                    R.drawable.test_image};*/
 
 
 }

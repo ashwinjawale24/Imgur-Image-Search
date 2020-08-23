@@ -27,6 +27,7 @@ import com.prajwal.prajwalwaingankar_cavista.viewModel.Response_ViewModel;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,21 +56,13 @@ public class MainActivity extends AppCompatActivity {
         gridView = findViewById(R.id.gridView);
         searchView = findViewById(R.id.searchView);
         context = MainActivity.this;
+        imageUrlsList = new ArrayList<>();
 
         connection = new API_RequestConnection();
 
         response_viewModel = new ViewModelProvider(MainActivity.this).get(Response_ViewModel.class);
-
-     /*   if(response_viewModel.getResult() != null) {
-            response_viewModel.getResult().observe(MainActivity.this, new Observer<List<String>>() {
-                @Override
-                public void onChanged(List<String> strings) {
-                    gridView.setAdapter(new ImageAdapter(context, strings));
-                    imageUrlsList = strings;
-                }
-            });*/
-
-            response_viewModel.getResult().observe(MainActivity.this, new Observer<Map<String, List<String>>>() {
+        response_viewModel.getResult().observe(MainActivity.this,
+                new Observer<Map<String, List<String>>>() {
                 @Override
                 public void onChanged(Map<String, List<String>> stringListMap) {
 
@@ -77,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                         mquery = key;
 
                     gridView.setAdapter(new ImageAdapter(context, stringListMap.get(mquery)));
-//                    imageUrlsList = strings;
+                    imageUrlsList = stringListMap.get(mquery);
                 }
             });
 
@@ -112,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 //           Toast.makeText(context, "Enter search field", Toast.LENGTH_SHORT).show();
 
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       /* gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -120,12 +113,13 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtra("url", imageUrlsList.get(position));
                 startActivity(i);
             }
-        });
+        });*/
     }
 
     public void new_request(final String vquery)
     {
 
+        imageUrlsList.clear();
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         final Observable<SearchResponse> observable =
                 apiInterface.getSearchImages(vquery, "Client-ID 137cda6b5008a7c");
@@ -136,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onNext(SearchResponse searchResponse) {
 //                            Log.d("praj", searchResponse.getData().get(0).getTitle());
-                        imageUrlsList = new ArrayList<>();
+
                         stringMap = new HashMap<>();
 
                         for (int i = 0; i < searchResponse.getData().size(); i++) {
@@ -159,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
                         }
 
-                        imageUrlsList.remove("empty");
+                        imageUrlsList.removeAll(Collections.singleton("empty"));
                         stringMap.put(vquery, imageUrlsList);
                         response_viewModel.getResult().setValue(stringMap);
 
