@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
                         for (int i = 0; i < searchResponse.getData().size(); i++) {
                             for (int j = 0; j < searchResponse.getData().get(i).getImages().size(); j++) {
 
+                                //TODO handle if search word results not found then...
+
                                 imageUrlsList.add(i, searchResponse.getData().get(i).getImages().get(j).getLink());
                             }
 
@@ -95,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onComplete() {
-
+dispose();
                     }
                 });
 
