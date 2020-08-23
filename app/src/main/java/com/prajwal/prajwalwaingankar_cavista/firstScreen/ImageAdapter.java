@@ -10,6 +10,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.prajwal.prajwalwaingankar_cavista.R;
 
 import java.util.List;
@@ -62,7 +63,7 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         Uri uri = Uri.parse(stringList.get(position));
-        Glide.with(context).load(uri).asBitmap().into(imageView);
+        Glide.with(context).load(uri).asBitmap().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageView);
 
         return imageView;
     }
