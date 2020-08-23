@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.prajwal.prajwalwaingankar_cavista.R;
 import com.prajwal.prajwalwaingankar_cavista.model.SearchResponse;
@@ -29,9 +30,6 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     GridView gridView;
@@ -39,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     ApiInterface apiInterface;
     List<String> imageUrlsList;
     Context context;
+    String mquery="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,32 @@ public class MainActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
         context = MainActivity.this;
 
-        getApiInterface();
+       /* searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                query = searchView.getQuery().toString();
+
+            }
+        });*/
+       searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+           @Override
+           public boolean onQueryTextSubmit(String query) {
+               mquery = query;
+               getApiInterface(mquery);
+               return false;
+           }
+
+           @Override
+           public boolean onQueryTextChange(String newText) {
+               return false;
+           }
+       });
+
+        if(!mquery.isEmpty())
+            getApiInterface(mquery);
+        else
+           Toast.makeText(context, "Enter search field", Toast.LENGTH_SHORT).show();
+
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -62,11 +86,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public ApiInterface getApiInterface()
+    public ApiInterface getApiInterface(String query)
     {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         final Observable<SearchResponse> observable =
-                apiInterface.getSearchImages("game", "Client-ID 137cda6b5008a7c");
+                apiInterface.getSearchImages(query, "Client-ID 137cda6b5008a7c");
         observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
