@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 //           Toast.makeText(context, "Enter search field", Toast.LENGTH_SHORT).show();
 
 
-       /* gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtra("url", imageUrlsList.get(position));
                 startActivity(i);
             }
-        });*/
+        });
     }
 
     public void new_request(final String vquery)

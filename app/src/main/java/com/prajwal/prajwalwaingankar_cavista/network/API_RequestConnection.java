@@ -32,7 +32,7 @@ public class API_RequestConnection {
     ApiInterface apiInterface;
     List<String> imageUrlsList;
     Map<String, List<String>> stringMap;
-    String mquery = "shapes"; //default value for first launch as shown in assignment.
+    String mquery = "shapes";  //default value for first launch as shown in assignment.
 
 
     public MutableLiveData<Map<String, List<String>>> getApiInterface() {
