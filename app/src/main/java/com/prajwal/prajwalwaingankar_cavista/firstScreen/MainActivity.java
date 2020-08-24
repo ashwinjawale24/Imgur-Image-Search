@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     List<String> imageUrlsList;
     Map<String, List<String>> stringMap;
     Context context;
-    String mquery="";
+    String mquery="", image_id;
     API_RequestConnection connection;
     Response_ViewModel response_viewModel;
 
