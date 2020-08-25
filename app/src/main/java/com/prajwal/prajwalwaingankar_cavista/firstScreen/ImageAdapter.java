@@ -27,6 +27,11 @@ public class ImageAdapter extends BaseAdapter {
     private List<String> stringList;
 
 
+    /**
+     * ImageAdapter constructor with two arguments
+     * @param context the context of the MainActivity
+     * @param imageUrlsList An arraylist of type String which contains all the images urls.
+     */
     public ImageAdapter(Context context, List<String> imageUrlsList) {
         this.context = context;
         this.stringList = imageUrlsList;
@@ -47,6 +52,14 @@ public class ImageAdapter extends BaseAdapter {
         return 0;
     }
 
+
+    /**
+     *
+     * @param position The current position of the item which is clicked
+     * @param convertView If the initialization of imageview is not done
+     * @param parent The viewgroup parent reference.
+     * @return View
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
@@ -67,14 +80,5 @@ public class ImageAdapter extends BaseAdapter {
 
         return imageView;
     }
-
-  /*  public Integer[] imageIds = {
-            //get all images links....and add them in this function & then load then from glide...
-                    R.drawable.test_image,
-                    R.drawable.test_image_2,
-                    R.drawable.test_image,
-                    R.drawable.test_image_2,
-                    R.drawable.test_image};*/
-
 
 }

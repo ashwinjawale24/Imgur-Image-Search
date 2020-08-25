@@ -15,9 +15,13 @@ import androidx.room.RoomDatabase;
 public abstract class Database extends RoomDatabase {
 
     public static Database database1;
-
     public abstract Comment_DAO comment_dao();
 
+    /**
+     *
+     * @param context the context passed to the Database instance
+     * @return Database
+     */
     public static synchronized Database getInstance(Context context)
     {
         if(database1 == null)

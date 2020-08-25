@@ -17,6 +17,10 @@ public class ApiClient {
     private static Retrofit retrofit = null;
     static OkHttpClient.Builder client = new OkHttpClient.Builder();
 
+    /**
+     * This function creates the Retrofit instance & states the baseUrl
+     * @return Retrofit
+     */
     public static Retrofit getApiClient() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

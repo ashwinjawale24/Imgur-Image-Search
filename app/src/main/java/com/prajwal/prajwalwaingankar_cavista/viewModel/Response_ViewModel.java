@@ -26,13 +26,13 @@ public class Response_ViewModel extends ViewModel {
         result = connection.getApiInterface();
     }
 
+    /**
+     * MutableLiveData return type stated getter function.
+     * @return void
+     */
     public MutableLiveData<Map<String, ImageDetails>> getResult() {
         return result;
     }
-
-   /* public void setResult(MutableLiveData<Map<String, List<String>>> result) {
-        this.result = result;
-    }*/
 
 
 }

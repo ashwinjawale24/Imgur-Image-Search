@@ -55,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
     API_RequestConnection connection;
     Response_ViewModel response_viewModel;
 
+    /**
+     * The onCreate() is the first function that is called
+     * when you launch your app.
+     * @param savedInstanceState savedInstanceState of the onCreate()
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,18 +102,9 @@ public class MainActivity extends AppCompatActivity {
                   Toast.makeText(context, "No images found! The query is either invalid or doesn't contains images", Toast.LENGTH_LONG).show();
               }
 
-
           }
       });
 
-
-       /* searchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                query = searchView.getQuery().toString();
-
-            }
-        });*/
        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
            @Override
            public boolean onQueryTextSubmit(String query) {
@@ -124,14 +120,6 @@ public class MainActivity extends AppCompatActivity {
            }
        });
 
-//        if(!mquery.isEmpty())
-//        {
-//            connection.getApiInterface();
-//        }
-
-//        else
-//           Toast.makeText(context, "Enter search field", Toast.LENGTH_SHORT).show();
-
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -146,9 +134,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    /**
+     * This function is used when making a new request
+     * to the api for new search query
+     * @param vquery the search query that is the endpoint of the api.
+     */
     public void new_request(final String vquery)
     {
-
         imageUrlsList.clear();
         imageTitleList.clear();
 
@@ -221,6 +214,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * This function checks for the internet connectivity function
+     * to avoid any crashes...
+     * @return void
+     */
     public void internet_check() {
 
             AlertDialog.Builder alerBuilder = new AlertDialog.Builder(context)

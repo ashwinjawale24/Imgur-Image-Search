@@ -34,7 +34,4 @@ public class ImageDetails {
         this.imageTitle = imageTitle;
     }
 
-
-
-
 }

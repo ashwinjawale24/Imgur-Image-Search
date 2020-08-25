@@ -37,6 +37,11 @@ public class API_RequestConnection {
     Map<String, ImageDetails> stringMap;
     String mquery = "shapes";  //default value for first launch as shown in assignment.
 
+    /**
+     * The api calling is done with this function where the query is passed
+     * as the argument and the api-key is passed as authentication.
+     * @return MutableLiveData<Map<String, ImageDetails>>
+     */
     public MutableLiveData<Map<String, ImageDetails>> getApiInterface() {
 
         if(mutableLiveData == null) {
@@ -68,8 +73,6 @@ public class API_RequestConnection {
                                                 .get(i).getImages().get(j).getLink().contains(".png")))
                                         {
 
-
-
                                             if(searchResponse.getData().get(i).getTitle() != null)
                                             {
                                                 imageUrlsList.add(i, searchResponse.getData().get(i)
@@ -94,9 +97,7 @@ public class API_RequestConnection {
                                     imagetitleList.add(i, "empty");
                                 }
 
-
                             }
-
 
 
                             imageUrlsList.removeAll(Collections.singleton("empty"));

@@ -402,12 +402,5 @@ public class DataModel {
         this.images = images;
     }
 
-   /* public AdConfig getAdConfig() {
-        return adConfig;
-    }
-
-    public void setAdConfig(AdConfig adConfig) {
-        this.adConfig = adConfig;
-    }*/
 
 }

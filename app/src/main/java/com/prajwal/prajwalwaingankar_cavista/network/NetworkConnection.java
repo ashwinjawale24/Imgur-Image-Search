@@ -17,6 +17,11 @@ public class NetworkConnection {
     public static final String TYPE_MOBILE = "MOBILE_DATA";
     public static final String TYPE_NOT_CONNECTED = "NO_CONNECTION";
 
+    /**
+     *
+     * @param context The context that is passed
+     * @return boolean
+     */
     public static boolean isOnline(Context context) {
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -24,7 +29,11 @@ public class NetworkConnection {
         return netInfo != null && netInfo.isConnected();
     }
 
-
+    /**
+     *
+     * @param context The context that is passed
+     * @return boolean
+     */
     public static boolean isConnecting(Context context) {
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -32,7 +41,11 @@ public class NetworkConnection {
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
-
+    /**
+     *
+     * @param context The context that is passed
+     * @return String
+     */
     public static String getConnectionType(Context context) {
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
