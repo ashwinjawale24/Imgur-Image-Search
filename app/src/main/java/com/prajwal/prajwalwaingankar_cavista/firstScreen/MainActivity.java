@@ -1,17 +1,21 @@
 package com.prajwal.prajwalwaingankar_cavista.firstScreen;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -22,6 +26,7 @@ import com.prajwal.prajwalwaingankar_cavista.model.SearchResponse;
 import com.prajwal.prajwalwaingankar_cavista.network.API_RequestConnection;
 import com.prajwal.prajwalwaingankar_cavista.network.ApiClient;
 import com.prajwal.prajwalwaingankar_cavista.network.ApiInterface;
+import com.prajwal.prajwalwaingankar_cavista.network.NetworkConnection;
 import com.prajwal.prajwalwaingankar_cavista.secondScreen.KotlinSecondScreen;
 import com.prajwal.prajwalwaingankar_cavista.viewModel.Response_ViewModel;
 
@@ -62,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
         imageTitleList = new ArrayList<>();
 
         connection = new API_RequestConnection();
+
+        if (!NetworkConnection.isOnline(context) || !NetworkConnection.isConnecting(context)) {
+            internet_check();
+        }
 
         response_viewModel = new ViewModelProvider(MainActivity.this).get(Response_ViewModel.class);
         response_viewModel.getResult().observe(MainActivity.this,
@@ -209,6 +218,27 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete() {
                     }
                 });
+
+    }
+
+    public void internet_check() {
+
+            AlertDialog.Builder alerBuilder = new AlertDialog.Builder(context)
+                    .setTitle("No Internet Connection")
+                    .setMessage("Please check your internet connection and try again later.")
+                    .setCancelable(false)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            moveTaskToBack(true);
+                            System.exit(1);   //non-zero states that the JVM has to be killed.
+                        }
+                    });
+            AlertDialog alertDialog = alerBuilder.create();
+            alertDialog.show();
+            Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            positiveButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+
 
     }
 
