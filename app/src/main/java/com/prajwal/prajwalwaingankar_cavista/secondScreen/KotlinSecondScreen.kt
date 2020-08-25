@@ -3,6 +3,7 @@ package com.prajwal.prajwalwaingankar_cavista.secondScreen
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
@@ -21,17 +22,21 @@ class KotlinSecondScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kotlinsecondscreen)
 
+        val image: ImageView = findViewById(R.id.imageView)
+        val editText: EditText = findViewById(R.id.editTextComment)
+        val button: Button = findViewById(R.id.button)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
+
+        val url: String = intent.extras?.getString("url") ?: ""
+        val imageTitle: String = intent.extras?.getString("title") ?: "No Title"
+        Log.d("KOTTitle", imageTitle)
+
+        toolbar.title = imageTitle
         setSupportActionBar(toolbar)
         toolbar.setTitleTextAppearance(this, R.style.ToolbarTheme)
         toolbar.setTitleTextColor(Color.WHITE)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(true)
-
-        val url: String = intent.extras?.getString("url") ?: ""
-        val image: ImageView = findViewById(R.id.imageView)
-        val editText: EditText = findViewById(R.id.editTextComment)
-        val button: Button = findViewById(R.id.button)
 
         val commentModel = CommentModel()
         val database = Database.getInstance(applicationContext)

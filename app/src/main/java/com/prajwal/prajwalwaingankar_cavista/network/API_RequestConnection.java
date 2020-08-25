@@ -1,12 +1,14 @@
 package com.prajwal.prajwalwaingankar_cavista.network;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.GridView;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.prajwal.prajwalwaingankar_cavista.firstScreen.ImageAdapter;
+import com.prajwal.prajwalwaingankar_cavista.model.ImageDetails;
 import com.prajwal.prajwalwaingankar_cavista.model.SearchResponse;
 
 import java.util.ArrayList;
@@ -28,14 +30,14 @@ import io.reactivex.schedulers.Schedulers;
 
 
 public class API_RequestConnection {
-    MutableLiveData<Map<String, List<String>>> mutableLiveData;
+    MutableLiveData<Map<String, ImageDetails>> mutableLiveData;
     ApiInterface apiInterface;
-    List<String> imageUrlsList;
-    Map<String, List<String>> stringMap;
+    List<String> imageUrlsList, imagetitleList;
+    ImageDetails details;
+    Map<String, ImageDetails> stringMap;
     String mquery = "shapes";  //default value for first launch as shown in assignment.
 
-
-    public MutableLiveData<Map<String, List<String>>> getApiInterface() {
+    public MutableLiveData<Map<String, ImageDetails>> getApiInterface() {
 
         if(mutableLiveData == null) {
 
@@ -52,23 +54,44 @@ public class API_RequestConnection {
                         public void onNext(SearchResponse searchResponse) {
 //                            Log.d("praj", searchResponse.getData().get(0).getTitle());
                             imageUrlsList = new ArrayList<>();
+                            imagetitleList = new ArrayList<>();
                             stringMap = new HashMap<>();
+                            details = new ImageDetails(imageUrlsList, imagetitleList);
 
                             for (int i = 0; i < searchResponse.getData().size(); i++) {
                                 if ((searchResponse.getData().get(i).getImages() != null)) {
-                                    for (int j = 0; j < searchResponse.getData().get(i).getImages().size(); j++) {
-                                        if (searchResponse.getData().get(i).getImages().get(j).getLink()
-                                                .contains(".jpg") || searchResponse.getData()
-                                                .get(i).getImages().get(j).getLink().contains(".png")) {
+                                    for (int j = 0; j < searchResponse.getData().get(i).getImages().size(); j++)
+                                    {
+                                        if ((searchResponse.getData().get(i).getImages()
+                                                .get(j).getLink().contains(".jpg")
+                                                || searchResponse.getData()
+                                                .get(i).getImages().get(j).getLink().contains(".png")))
+                                        {
 
-                                            imageUrlsList.add(i, searchResponse.getData().get(i)
-                                                    .getImages().get(j).getLink());
+
+
+                                            if(searchResponse.getData().get(i).getTitle() != null)
+                                            {
+                                                imageUrlsList.add(i, searchResponse.getData().get(i)
+                                                        .getImages().get(j).getLink());
+                                                imagetitleList.add(i, searchResponse.getData().get(i)
+                                                        .getTitle());
+                                            }
+                                            else
+                                            {
+                                                imageUrlsList.add(i, searchResponse.getData().get(i)
+                                                        .getImages().get(j).getLink());
+                                                imagetitleList.add(i, "No title");
+                                            }
+
                                         } else {
                                             imageUrlsList.add(i, "empty");
+                                            imagetitleList.add(i, "empty");
                                         }
                                     }
                                 } else {
                                     imageUrlsList.add(i, "empty");
+                                    imagetitleList.add(i, "empty");
                                 }
 
 
@@ -77,7 +100,9 @@ public class API_RequestConnection {
 
 
                             imageUrlsList.removeAll(Collections.singleton("empty"));
-                            stringMap.put(getMquery(), imageUrlsList);
+                            imagetitleList.removeAll(Collections.singleton("empty"));
+                            stringMap.put(getMquery(), new ImageDetails(imageUrlsList, imagetitleList));
+
                             mutableLiveData.setValue(stringMap);
 
                             Log.d("praj31", String.valueOf(imageUrlsList.size()));

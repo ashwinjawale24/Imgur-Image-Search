@@ -17,6 +17,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.prajwal.prajwalwaingankar_cavista.R;
+import com.prajwal.prajwalwaingankar_cavista.model.ImageDetails;
 import com.prajwal.prajwalwaingankar_cavista.model.SearchResponse;
 import com.prajwal.prajwalwaingankar_cavista.network.API_RequestConnection;
 import com.prajwal.prajwalwaingankar_cavista.network.ApiClient;
@@ -31,6 +32,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -41,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
     GridView gridView;
     SearchView searchView;
     ApiInterface apiInterface;
-    List<String> imageUrlsList;
-    Map<String, List<String>> stringMap;
+    List<String> imageUrlsList, imageTitleList;
+    Map<String, ImageDetails> stringMap;
     Context context;
     String mquery="", image_id;
     API_RequestConnection connection;
@@ -57,11 +59,12 @@ public class MainActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
         context = MainActivity.this;
         imageUrlsList = new ArrayList<>();
+        imageTitleList = new ArrayList<>();
 
         connection = new API_RequestConnection();
 
         response_viewModel = new ViewModelProvider(MainActivity.this).get(Response_ViewModel.class);
-        response_viewModel.getResult().observe(MainActivity.this,
+      /*  response_viewModel.getResult().observe(MainActivity.this,
                 new Observer<Map<String, List<String>>>() {
                 @Override
                 public void onChanged(Map<String, List<String>> stringListMap) {
@@ -72,7 +75,22 @@ public class MainActivity extends AppCompatActivity {
                     gridView.setAdapter(new ImageAdapter(context, stringListMap.get(mquery)));
                     imageUrlsList = stringListMap.get(mquery);
                 }
-            });
+            });*/
+      response_viewModel.getResult().observe(MainActivity.this, new Observer<Map<String, ImageDetails>>() {
+          @Override
+          public void onChanged(Map<String, ImageDetails> stringImageDetailsMap) {
+              for(String key : stringImageDetailsMap.keySet())
+                  mquery = key;
+
+              //Image Links
+              gridView.setAdapter(new ImageAdapter(context, Objects.requireNonNull(stringImageDetailsMap.get(mquery)).getImageLink()));
+              imageUrlsList = Objects.requireNonNull(stringImageDetailsMap.get(mquery)).getImageLink();
+
+              //image Titles
+              imageTitleList = Objects.requireNonNull(stringImageDetailsMap.get(mquery)).getImageTitle();
+
+          }
+      });
 
 
        /* searchView.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent i = new Intent(getApplicationContext(), KotlinSecondScreen.class);
                 i.putExtra("url", imageUrlsList.get(position));
+                i.putExtra("title", imageTitleList.get(position));
+                Log.d("Title", imageTitleList.get(position));
                 startActivity(i);
             }
         });
@@ -121,6 +141,8 @@ public class MainActivity extends AppCompatActivity {
     {
 
         imageUrlsList.clear();
+        imageTitleList.clear();
+
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         final Observable<SearchResponse> observable =
                 apiInterface.getSearchImages(vquery, "Client-ID 137cda6b5008a7c");
@@ -141,21 +163,38 @@ public class MainActivity extends AppCompatActivity {
                                             .contains(".jpg") || searchResponse.getData()
                                             .get(i).getImages().get(j).getLink().contains(".png")) {
 
-                                        imageUrlsList.add(i, searchResponse.getData().get(i)
-                                                .getImages().get(j).getLink());
+
+                                        if(searchResponse.getData().get(i).getTitle() != null)
+                                        {
+                                            imageUrlsList.add(i, searchResponse.getData().get(i)
+                                                    .getImages().get(j).getLink());
+                                            imageTitleList.add(i, searchResponse.getData().get(i)
+                                                    .getTitle());
+                                        }
+                                        else
+                                        {
+                                            imageUrlsList.add(i, searchResponse.getData().get(i)
+                                                    .getImages().get(j).getLink());
+                                            imageTitleList.add(i, "no title");
+                                        }
                                     } else {
                                         imageUrlsList.add(i, "empty");
+                                        imageTitleList.add(i, "empty");
                                     }
                                 }
                             } else {
                                 imageUrlsList.add(i, "empty");
+                                imageTitleList.add(i, "empty");
                             }
 
 
                         }
 
                         imageUrlsList.removeAll(Collections.singleton("empty"));
-                        stringMap.put(vquery, imageUrlsList);
+                        imageTitleList.removeAll(Collections.singleton("empty"));
+//                        stringMap.put(vquery, imageUrlsList);
+                        stringMap.put(vquery, new ImageDetails(imageUrlsList, imageTitleList));
+//                        response_viewModel.getResult().setValue(stringMap);
                         response_viewModel.getResult().setValue(stringMap);
 
                         Log.d("praj31", String.valueOf(imageUrlsList.size()));
