@@ -34,7 +34,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbarlayout"
         tools:src="@drawable/loading"
-        android:alpha="0.6" />
+         />
 
     <EditText
         android:id="@+id/editTextComment"
