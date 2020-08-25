@@ -64,30 +64,30 @@ public class MainActivity extends AppCompatActivity {
         connection = new API_RequestConnection();
 
         response_viewModel = new ViewModelProvider(MainActivity.this).get(Response_ViewModel.class);
-      /*  response_viewModel.getResult().observe(MainActivity.this,
-                new Observer<Map<String, List<String>>>() {
-                @Override
-                public void onChanged(Map<String, List<String>> stringListMap) {
+        response_viewModel.getResult().observe(MainActivity.this,
+                new Observer<Map<String, ImageDetails>>() {
 
-                    for(String key : stringListMap.keySet())
-                        mquery = key;
-
-                    gridView.setAdapter(new ImageAdapter(context, stringListMap.get(mquery)));
-                    imageUrlsList = stringListMap.get(mquery);
-                }
-            });*/
-      response_viewModel.getResult().observe(MainActivity.this, new Observer<Map<String, ImageDetails>>() {
           @Override
           public void onChanged(Map<String, ImageDetails> stringImageDetailsMap) {
               for(String key : stringImageDetailsMap.keySet())
                   mquery = key;
 
-              //Image Links
-              gridView.setAdapter(new ImageAdapter(context, Objects.requireNonNull(stringImageDetailsMap.get(mquery)).getImageLink()));
               imageUrlsList = Objects.requireNonNull(stringImageDetailsMap.get(mquery)).getImageLink();
 
               //image Titles
               imageTitleList = Objects.requireNonNull(stringImageDetailsMap.get(mquery)).getImageTitle();
+
+              if(!stringImageDetailsMap.get(mquery).getImageLink().isEmpty())
+              {
+                  //Image Links
+                  gridView.setAdapter(new ImageAdapter(context, Objects.requireNonNull
+                          (stringImageDetailsMap.get(mquery)).getImageLink()));
+              }
+              else
+              {
+                  Toast.makeText(context, "No images found! The query is either invalid or doesn't contains images", Toast.LENGTH_LONG).show();
+              }
+
 
           }
       });
