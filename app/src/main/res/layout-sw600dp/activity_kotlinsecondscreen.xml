@@ -29,12 +29,13 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:background="#FDEFF379"
+        android:background="#e0e0e0"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbarlayout"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@drawable/loading"
+        android:alpha="0.6" />
 
     <EditText
         android:id="@+id/editTextComment"
@@ -60,9 +61,12 @@
         android:layout_marginEnd="124dp"
         android:layout_marginBottom="198dp"
         android:text="Submit"
+        android:textColor="@color/colorPrimaryDark"
         android:background="@drawable/button_layerlist"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextComment" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

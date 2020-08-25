@@ -28,12 +28,13 @@
         android:id="@+id/imageView"
         android:layout_width="350dp"
         android:layout_height="0dp"
-        android:background="#FDEFF379"
+        android:background="#e0e0e0"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbarlayout"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@drawable/loading"
+        android:alpha="0.6" />
 
     <EditText
         android:id="@+id/editTextComment"
@@ -56,6 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:text="Submit"
+        android:textColor="@color/colorPrimaryDark"
         android:background="@drawable/button_layerlist"
         app:layout_constraintLeft_toRightOf="@+id/imageView"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -60,6 +60,7 @@
         android:layout_marginEnd="164dp"
         android:layout_marginBottom="198dp"
         android:text="Submit"
+        android:textColor="@color/colorPrimaryDark"
         android:background="@drawable/button_layerlist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
