@@ -28,7 +28,7 @@ public class Response_ViewModel extends ViewModel {
 
     /**
      * MutableLiveData return type stated getter function.
-     * @return void
+     * @return MutableLiveData<Map<String, ImageDetails>>
      */
     public MutableLiveData<Map<String, ImageDetails>> getResult() {
         return result;
