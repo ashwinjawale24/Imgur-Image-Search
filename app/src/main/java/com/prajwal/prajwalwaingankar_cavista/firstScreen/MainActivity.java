@@ -38,6 +38,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
           }
       });
 
+
        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
            @Override
            public boolean onQueryTextSubmit(String query) {
@@ -149,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
         final Observable<SearchResponse> observable =
                 apiInterface.getSearchImages(vquery, "Client-ID 137cda6b5008a7c");
         observable
+                .debounce(250, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<SearchResponse>() {
@@ -239,5 +242,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
 }
