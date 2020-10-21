@@ -52,13 +52,14 @@ public class MainActivity extends AppCompatActivity {
     List<String> imageUrlsList, imageTitleList;
     Map<String, ImageDetails> stringMap;
     Context context;
-    String mquery="", image_id;
+    String mquery = "", image_id;
     API_RequestConnection connection;
     Response_ViewModel response_viewModel;
 
     /**
      * The onCreate() is the first function that is called
      * when you launch your app.
+     *
      * @param savedInstanceState savedInstanceState of the onCreate()
      */
     @Override
@@ -82,45 +83,42 @@ public class MainActivity extends AppCompatActivity {
         response_viewModel.getResult().observe(MainActivity.this,
                 new Observer<Map<String, ImageDetails>>() {
 
-          @Override
-          public void onChanged(Map<String, ImageDetails> stringImageDetailsMap) {
-              for(String key : stringImageDetailsMap.keySet())
-                  mquery = key;
+                    @Override
+                    public void onChanged(Map<String, ImageDetails> stringImageDetailsMap) {
+                        for (String key : stringImageDetailsMap.keySet())
+                            mquery = key;
 
-              imageUrlsList = Objects.requireNonNull(stringImageDetailsMap.get(mquery)).getImageLink();
+                        imageUrlsList = Objects.requireNonNull(stringImageDetailsMap.get(mquery)).getImageLink();
 
-              //image Titles
-              imageTitleList = Objects.requireNonNull(stringImageDetailsMap.get(mquery)).getImageTitle();
+                        //image Titles
+                        imageTitleList = Objects.requireNonNull(stringImageDetailsMap.get(mquery)).getImageTitle();
 
-              if(!stringImageDetailsMap.get(mquery).getImageLink().isEmpty())
-              {
-                  //Image Links
-                  gridView.setAdapter(new ImageAdapter(context, Objects.requireNonNull
-                          (stringImageDetailsMap.get(mquery)).getImageLink()));
-              }
-              else
-              {
-                  Toast.makeText(context, "No images found! The query is either invalid or doesn't contains images", Toast.LENGTH_LONG).show();
-              }
+                        if (!stringImageDetailsMap.get(mquery).getImageLink().isEmpty()) {
+                            //Image Links
+                            gridView.setAdapter(new ImageAdapter(context, Objects.requireNonNull
+                                    (stringImageDetailsMap.get(mquery)).getImageLink()));
+                        } else {
+                            Toast.makeText(context, "No images found! The query is either invalid or doesn't contains images", Toast.LENGTH_LONG).show();
+                        }
 
-          }
-      });
+                    }
+                });
 
 
-       searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-           @Override
-           public boolean onQueryTextSubmit(String query) {
-               mquery = query;
-               new_request(query);
-               searchView.clearFocus();  //disables the keyboard show up on rotation.
-               return false;
-           }
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                mquery = query;
+                new_request(query);
+                searchView.clearFocus();  //disables the keyboard show up on rotation.
+                return false;
+            }
 
-           @Override
-           public boolean onQueryTextChange(String newText) {
-               return false;
-           }
-       });
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
 
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -140,10 +138,10 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This function is used when making a new request
      * to the api for new search query
+     *
      * @param vquery the search query that is the endpoint of the api.
      */
-    public void new_request(final String vquery)
-    {
+    public void new_request(final String vquery) {
         imageUrlsList.clear();
         imageTitleList.clear();
 
@@ -169,15 +167,12 @@ public class MainActivity extends AppCompatActivity {
                                             .get(i).getImages().get(j).getLink().contains(".png")) {
 
 
-                                        if(searchResponse.getData().get(i).getTitle() != null)
-                                        {
+                                        if (searchResponse.getData().get(i).getTitle() != null) {
                                             imageUrlsList.add(i, searchResponse.getData().get(i)
                                                     .getImages().get(j).getLink());
                                             imageTitleList.add(i, searchResponse.getData().get(i)
                                                     .getTitle());
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             imageUrlsList.add(i, searchResponse.getData().get(i)
                                                     .getImages().get(j).getLink());
                                             imageTitleList.add(i, "no title");
@@ -220,25 +215,26 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This function checks for the internet connectivity function
      * to avoid any crashes...
+     *
      * @return void
      */
     public void internet_check() {
 
-            AlertDialog.Builder alerBuilder = new AlertDialog.Builder(context)
-                    .setTitle("No Internet Connection")
-                    .setMessage("Please check your internet connection and try again later.")
-                    .setCancelable(false)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            moveTaskToBack(true);
-                            System.exit(1);   //non-zero states that the JVM has to be killed.
-                        }
-                    });
-            AlertDialog alertDialog = alerBuilder.create();
-            alertDialog.show();
-            Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-            positiveButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        AlertDialog.Builder alerBuilder = new AlertDialog.Builder(context)
+                .setTitle("No Internet Connection")
+                .setMessage("Please check your internet connection and try again later.")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        moveTaskToBack(true);
+                        System.exit(1);   //non-zero states that the JVM has to be killed.
+                    }
+                });
+        AlertDialog alertDialog = alerBuilder.create();
+        alertDialog.show();
+        Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
 
 
     }
