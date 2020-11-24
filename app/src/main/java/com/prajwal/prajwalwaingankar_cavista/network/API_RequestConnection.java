@@ -36,14 +36,14 @@ public class API_RequestConnection {
     List<String> imageUrlsList, imagetitleList;
     ImageDetails details;
     Map<String, ImageDetails> stringMap;
-    String mquery = "shapes";  //default value for first launch as shown in assignment.
+   // String mquery = "shapes";  //default value for first launch as shown in assignment.
 
     /**
      * The api calling is done with this function where the query is passed
      * as the argument and the api-key is passed as authentication.
      * @return MutableLiveData<Map<String, ImageDetails>>
      */
-    public MutableLiveData<Map<String, ImageDetails>> getApiInterface() {
+    public MutableLiveData<Map<String, ImageDetails>> getApiInterface(String query) {
 
         if(mutableLiveData == null) {
 
@@ -51,7 +51,7 @@ public class API_RequestConnection {
 
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
             final Observable<SearchResponse> observable =
-                    apiInterface.getSearchImages(getMquery(), "Client-ID 137cda6b5008a7c");
+                    apiInterface.getSearchImages(query, "Client-ID 137cda6b5008a7c");
             observable
                     .debounce(250, TimeUnit.MILLISECONDS)
                     .subscribeOn(Schedulers.io())
@@ -104,7 +104,7 @@ public class API_RequestConnection {
 
                             imageUrlsList.removeAll(Collections.singleton("empty"));
                             imagetitleList.removeAll(Collections.singleton("empty"));
-                            stringMap.put(getMquery(), new ImageDetails(imageUrlsList, imagetitleList));
+                            stringMap.put(query, new ImageDetails(imageUrlsList, imagetitleList));
 
                             mutableLiveData.setValue(stringMap);
 
@@ -122,19 +122,19 @@ public class API_RequestConnection {
                         }
                     });
 
-            return mutableLiveData;
+           // return mutableLiveData;
 
         }
         return mutableLiveData;
     }
 
-    public String getMquery() {
-        return mquery;
-    }
-
-    public void setMquery(String mquery) {
-        this.mquery = mquery;
-    }
+//    public String getMquery() {
+//        return mquery;
+//    }
+//
+//    public void setMquery(String mquery) {
+//        this.mquery = mquery;
+//    }
 
 
 

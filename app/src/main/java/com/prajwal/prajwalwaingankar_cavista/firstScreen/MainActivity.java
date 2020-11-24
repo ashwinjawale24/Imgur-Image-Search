@@ -2,6 +2,7 @@ package com.prajwal.prajwalwaingankar_cavista.firstScreen;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         response_viewModel = new ViewModelProvider(MainActivity.this).get(Response_ViewModel.class);
+        response_viewModel.setQuery("cats");
         response_viewModel.getResult().observe(MainActivity.this,
                 new Observer<Map<String, ImageDetails>>() {
 
@@ -109,7 +111,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 mquery = query;
-                new_request(query);
+                //response_viewModel.getResult().removeObservers(MainActivity.this);
+              //  new_request(query);
+                response_viewModel.setQuery(query);
                 searchView.clearFocus();  //disables the keyboard show up on rotation.
                 return false;
             }
@@ -141,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param vquery the search query that is the endpoint of the api.
      */
+/*
     public void new_request(final String vquery) {
         imageUrlsList.clear();
         imageTitleList.clear();
@@ -211,6 +216,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
+*/
 
     /**
      * This function checks for the internet connectivity function
