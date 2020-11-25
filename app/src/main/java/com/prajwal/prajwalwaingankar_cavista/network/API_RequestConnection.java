@@ -45,7 +45,7 @@ public class API_RequestConnection {
      */
     public MutableLiveData<Map<String, ImageDetails>> getApiInterface(String query) {
 
-        if(mutableLiveData == null) {
+//        if(mutableLiveData == null) {
 
             mutableLiveData = new MutableLiveData<>();
 
@@ -124,7 +124,7 @@ public class API_RequestConnection {
 
            // return mutableLiveData;
 
-        }
+       // }
         return mutableLiveData;
     }
 

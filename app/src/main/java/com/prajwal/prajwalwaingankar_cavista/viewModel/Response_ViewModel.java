@@ -30,9 +30,13 @@ public class Response_ViewModel extends ViewModel {
        // connection
         //whenever search_query value will be set to new value (new_searchQuery variable contains this new
         // value; connection.getApiInterface(query) will be called).
+        search_query.setValue("cats");
         connection = new API_RequestConnection();
+
          result = Transformations.switchMap(search_query,
-                new_searchQuery -> connection.getApiInterface(new_searchQuery));
+                new_searchQuery -> {
+                    return connection.getApiInterface(new_searchQuery);
+                });
     }
 
     /**

@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         response_viewModel = new ViewModelProvider(MainActivity.this).get(Response_ViewModel.class);
-        response_viewModel.setQuery("cats");
+      //  response_viewModel.setQuery("cats");
         response_viewModel.getResult().observe(MainActivity.this,
                 new Observer<Map<String, ImageDetails>>() {
 
