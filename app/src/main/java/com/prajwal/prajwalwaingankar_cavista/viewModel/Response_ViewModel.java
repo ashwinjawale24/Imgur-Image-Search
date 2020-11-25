@@ -27,13 +27,11 @@ public class Response_ViewModel extends ViewModel {
 
 
     public Response_ViewModel() {
-       // connection
-        //whenever search_query value will be set to new value (new_searchQuery variable contains this new
-        // value; connection.getApiInterface(query) will be called).
+
         search_query.setValue("cats");
         connection = new API_RequestConnection();
 
-         result = Transformations.switchMap(search_query,
+        result = Transformations.switchMap(search_query,
                 new_searchQuery -> {
                     return connection.getApiInterface(new_searchQuery);
                 });
@@ -41,7 +39,8 @@ public class Response_ViewModel extends ViewModel {
 
     /**
      * MutableLiveData return type stated getter function.
-     * @return MutableLiveData<Map<String, ImageDetails>>
+     *
+     * @return MutableLiveData<Map < String, ImageDetails>>
      */
     public LiveData<Map<String, ImageDetails>> getResult() {
         return result;
