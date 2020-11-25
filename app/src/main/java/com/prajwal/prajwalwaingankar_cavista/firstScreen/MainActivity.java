@@ -2,6 +2,7 @@ package com.prajwal.prajwalwaingankar_cavista.firstScreen;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 mquery = query;
-                new_request(query);
+                response_viewModel.setQuery(query);
                 searchView.clearFocus();  //disables the keyboard show up on rotation.
                 return false;
             }
@@ -141,76 +142,6 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param vquery the search query that is the endpoint of the api.
      */
-    public void new_request(final String vquery) {
-        imageUrlsList.clear();
-        imageTitleList.clear();
-
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        final Observable<SearchResponse> observable =
-                apiInterface.getSearchImages(vquery, "Client-ID 137cda6b5008a7c");
-        observable
-                .debounce(250, TimeUnit.MILLISECONDS)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<SearchResponse>() {
-                    @Override
-                    public void onNext(SearchResponse searchResponse) {
-//                            Log.d("praj", searchResponse.getData().get(0).getTitle());
-
-                        stringMap = new HashMap<>();
-
-                        for (int i = 0; i < searchResponse.getData().size(); i++) {
-                            if ((searchResponse.getData().get(i).getImages() != null)) {
-                                for (int j = 0; j < searchResponse.getData().get(i).getImages().size(); j++) {
-                                    if (searchResponse.getData().get(i).getImages().get(j).getLink()
-                                            .contains(".jpg") || searchResponse.getData()
-                                            .get(i).getImages().get(j).getLink().contains(".png")) {
-
-
-                                        if (searchResponse.getData().get(i).getTitle() != null) {
-                                            imageUrlsList.add(i, searchResponse.getData().get(i)
-                                                    .getImages().get(j).getLink());
-                                            imageTitleList.add(i, searchResponse.getData().get(i)
-                                                    .getTitle());
-                                        } else {
-                                            imageUrlsList.add(i, searchResponse.getData().get(i)
-                                                    .getImages().get(j).getLink());
-                                            imageTitleList.add(i, "no title");
-                                        }
-                                    } else {
-                                        imageUrlsList.add(i, "empty");
-                                        imageTitleList.add(i, "empty");
-                                    }
-                                }
-                            } else {
-                                imageUrlsList.add(i, "empty");
-                                imageTitleList.add(i, "empty");
-                            }
-
-
-                        }
-
-                        imageUrlsList.removeAll(Collections.singleton("empty"));
-                        imageTitleList.removeAll(Collections.singleton("empty"));
-//                        stringMap.put(vquery, imageUrlsList);
-                        stringMap.put(vquery, new ImageDetails(imageUrlsList, imageTitleList));
-//                        response_viewModel.getResult().setValue(stringMap);
-                        response_viewModel.getResult().setValue(stringMap);
-
-                        Log.d("praj31", String.valueOf(imageUrlsList.size()));
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                    }
-                });
-
-    }
 
     /**
      * This function checks for the internet connectivity function
@@ -235,8 +166,6 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
         Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
         positiveButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-
-
     }
 
 
