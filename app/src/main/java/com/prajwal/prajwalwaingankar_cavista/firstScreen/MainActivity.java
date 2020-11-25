@@ -1,7 +1,9 @@
 package com.prajwal.prajwalwaingankar_cavista.firstScreen;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -14,11 +16,13 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.prajwal.prajwalwaingankar_cavista.R;
@@ -69,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         gridView = findViewById(R.id.gridView);
-        searchView = findViewById(R.id.searchView);
+       // searchView = findViewById(R.id.searchView);
         context = MainActivity.this;
         imageUrlsList = new ArrayList<>();
         imageTitleList = new ArrayList<>();
@@ -106,20 +110,6 @@ public class MainActivity extends AppCompatActivity {
                 });
 
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                mquery = query;
-                response_viewModel.setQuery(query);
-                searchView.clearFocus();  //disables the keyboard show up on rotation.
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
 
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -168,5 +158,36 @@ public class MainActivity extends AppCompatActivity {
         positiveButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_main, menu);
+        MenuItem menuItem = menu.findItem(R.id.search_item);
+        searchView = (SearchView) menuItem.getActionView();
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.search_item:
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        mquery = query;
+                        response_viewModel.setQuery(query);
+                        searchView.clearFocus();  //disables the keyboard show up on rotation.
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        return false;
+                    }
+                });
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
