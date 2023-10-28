@@ -23,7 +23,7 @@ Thank you!
 
 *******Screenshots*********
 
-![Screenshot_2023-10-28-19-57-41-36_9c9534432661adc16a85886ca5ab0363](https://github.com/ashwinjawale24/Imgur-Image-Search/assets/83861327/d4b64d74-115a-489a-ad35-7eef16fe6b26)
+![Screenshot_2023-10-28-19-57-41-36_9c9534432661adc16a85886ca5ab0363](https://github.com/ashwinjawale24/Imgur-Image-Search/assets/83861327/6c7b05ea-c4fe-4e0d-be7f-140622316232)
 
 
 ![Screenshot_2023-10-28-19-57-48-02_9c9534432661adc16a85886ca5ab0363](https://github.com/ashwinjawale24/Imgur-Image-Search/assets/83861327/f834dc1f-0603-45e6-9cc6-839c456b0c99)
