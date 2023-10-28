@@ -23,5 +23,5 @@ Thank you!
 
 *******Screenshots*********
 
-[url=https://postimg.cc/qzyzMxJW][img]https://i.postimg.cc/qzyzMxJW/Screenshot-2023-10-28-19-57-41-36-9c9534432661adc16a85886ca5ab0363.jpg[/img][/url]
+![Screenshot_2023-10-28-19-57-41-36_9c9534432661adc16a85886ca5ab0363](https://github.com/ashwinjawale24/Imgur-Image-Search/assets/83861327/d4b64d74-115a-489a-ad35-7eef16fe6b26)
 
