@@ -1,6 +1,10 @@
-# Imgur_API
-This project is a combination of both Java and Kotlin language which uses the MVVM architecture pattern
+
+This project is developed using Kotlin language which uses the MVVM architecture pattern
 followed for better performance and ease of understanding of code.
+
+Using Imgur Api We can Search  Images with their Title and Date Time Posted.
+
+We can Toggle Between GridView And ListView 
 
 The api is hit which in response gets an array of images with urls. This urls are then loaded in the GridView.
 The api is hit using RxJava and RxAndroid for better performance handling for the api.
@@ -16,6 +20,3 @@ The UI is designed using ConstraintLayout for screens like:
 The functions and code block written in the project have been documented in the code as well.
 
 Thank you!
-
-For contact:
-mail @ : prajwalwaingankar@gmail.com
