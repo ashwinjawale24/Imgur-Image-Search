@@ -20,3 +20,8 @@ The UI is designed using ConstraintLayout for screens like:
 The functions and code block written in the project have been documented in the code as well.
 
 Thank you!
+
+*******Screenshots*********
+
+[url=https://postimg.cc/qzyzMxJW][img]https://i.postimg.cc/qzyzMxJW/Screenshot-2023-10-28-19-57-41-36-9c9534432661adc16a85886ca5ab0363.jpg[/img][/url]
+
