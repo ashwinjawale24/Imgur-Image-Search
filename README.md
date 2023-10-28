@@ -24,15 +24,15 @@ Thank you!
 *******Screenshots*********
 
 
-![Screenshot_2023-10-28-19-57-41-36_9c9534432661adc16a85886ca5ab0363 (4)](https://github.com/ashwinjawale24/Imgur-Image-Search/assets/83861327/b1c3f374-b9d7-49b3-924c-0442ca161b8d)
+![Screenshot_2023-10-28-19-57-41-36_9c9534432661adc16a85886ca5ab0363 (6)](https://github.com/ashwinjawale24/Imgur-Image-Search/assets/83861327/714625bc-8ebd-4967-86f7-407cb9f79365)
 
 
-![Screenshot_2023-10-28-19-57-48-02_9c9534432661adc16a85886ca5ab0363](https://github.com/ashwinjawale24/Imgur-Image-Search/assets/83861327/f834dc1f-0603-45e6-9cc6-839c456b0c99)
+![Screenshot_2023-10-28-19-57-48-02_9c9534432661adc16a85886ca5ab0363](https://github.com/ashwinjawale24/Imgur-Image-Search/assets/83861327/732a04f2-131b-47f2-a9e3-2e1a4cc5e548)
 
-![Screenshot_2023-10-28-19-57-52-64_9c9534432661adc16a85886ca5ab0363](https://github.com/ashwinjawale24/Imgur-Image-Search/assets/83861327/f0f7a35d-d7d3-4553-9bb1-9db14df6dd53)
+![Screenshot_2023-10-28-19-57-52-64_9c9534432661adc16a85886ca5ab0363](https://github.com/ashwinjawale24/Imgur-Image-Search/assets/83861327/bf640c3a-6884-49cf-b998-28bda5317075)
 
-![Screenshot_2023-10-28-19-58-03-04_9c9534432661adc16a85886ca5ab0363](https://github.com/ashwinjawale24/Imgur-Image-Search/assets/83861327/b1248ce2-a46e-4c0d-b525-08557165c214)
+![Screenshot_2023-10-28-19-58-03-04_9c9534432661adc16a85886ca5ab0363](https://github.com/ashwinjawale24/Imgur-Image-Search/assets/83861327/b0a900dc-4712-420c-8273-aee0b38afc0a)
 
-![Screenshot_2023-10-28-19-58-24-23_9c9534432661adc16a85886ca5ab0363](https://github.com/ashwinjawale24/Imgur-Image-Search/assets/83861327/875ffe89-8b91-4bc3-ae81-10b6367b3706)
+![Screenshot_2023-10-28-19-58-24-23_9c9534432661adc16a85886ca5ab0363](https://github.com/ashwinjawale24/Imgur-Image-Search/assets/83861327/50afb76c-1f4e-41f5-8535-7d17ce0391d2)
 
 
