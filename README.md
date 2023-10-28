@@ -1,5 +1,5 @@
 
-This project is developed using Kotlin language which uses the MVVM architecture pattern
+This Application is developed using Kotlin language which uses the MVVM architecture pattern
 followed for better performance and ease of understanding of code.
 
 Using Imgur Api We can Search  Images with their Title and Date Time Posted.
