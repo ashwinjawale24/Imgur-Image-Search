@@ -1,14 +1,9 @@
-package com.prajwal.prajwalwaingankar_cavista.network;
+package com.ashwin.thoughtctl.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-/**
- * Created by Prajwal Waingankar
- * on 25-Aug-20.
- * Github: prajwalmw
- */
 
 
 public class NetworkConnection {

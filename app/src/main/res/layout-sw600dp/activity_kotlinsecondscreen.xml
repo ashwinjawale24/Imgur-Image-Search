@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".secondScreen.KotlinSecondScreen">
+    tools:context=".DetailScreen.KotlinSecondScreen">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarlayout"
@@ -30,43 +30,34 @@
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:background="#e0e0e0"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbarlayout"
         tools:src="@drawable/loading"
-         />
+        />
 
-    <EditText
-        android:id="@+id/editTextComment"
+
+    <TextView
+        android:id="@+id/txtTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="170dp"
-        android:layout_marginEnd="50dp"
-        android:ems="10"
-        android:paddingVertical="20dp"
-        android:inputType="textPersonName"
-        android:hint="Enter comment here"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="124dp"
-        android:layout_marginBottom="198dp"
-        android:text="Submit"
-        android:textColor="@color/colorPrimaryDark"
-        android:background="@drawable/button_layerlist"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextComment" />
+        android:textColor="#000"
+        android:text="Title"
+        android:padding="12dp"
+        android:textSize="26sp"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        />
+    <TextView
+        android:id="@+id/txtdatetime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:padding="12dp"
+        android:text="22/35/4565"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

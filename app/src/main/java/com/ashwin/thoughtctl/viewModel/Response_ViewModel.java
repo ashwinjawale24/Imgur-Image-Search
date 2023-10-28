@@ -1,23 +1,15 @@
-package com.prajwal.prajwalwaingankar_cavista.viewModel;
+package com.ashwin.thoughtctl.viewModel;
 
-import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import com.prajwal.prajwalwaingankar_cavista.model.ImageDetails;
-import com.prajwal.prajwalwaingankar_cavista.network.API_RequestConnection;
+import com.ashwin.thoughtctl.model.ImageDetails;
+import com.ashwin.thoughtctl.network.API_RequestConnection;
 
-import java.util.List;
 import java.util.Map;
 
-
-/**
- * Created by Prajwal Waingankar
- * on 23-Aug-20.
- * Github: prajwalmw
- */
 
 
 public class Response_ViewModel extends ViewModel {
@@ -28,7 +20,7 @@ public class Response_ViewModel extends ViewModel {
 
     public Response_ViewModel() {
 
-        search_query.setValue("cats");
+        search_query.setValue("Top images");
         connection = new API_RequestConnection();
 
         result = Transformations.switchMap(search_query,

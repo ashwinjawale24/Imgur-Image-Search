@@ -9,4 +9,16 @@
         android:icon="@drawable/ic_white_search_24"
         app:showAsAction="ifRoom|collapseActionView" />
 
+
+        <item android:id="@+id/list"
+            app:showAsAction="withText"
+            android:icon="@drawable/baseline_view_list_24"
+            android:title="ListView"/>
+
+
+        <item android:id="@+id/grid"
+            android:icon="@drawable/baseline_grid_view_24"
+            android:title="GridView"/>
+
+
 </menu>

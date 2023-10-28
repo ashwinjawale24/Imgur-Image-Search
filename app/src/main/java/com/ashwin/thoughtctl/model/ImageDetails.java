@@ -1,21 +1,27 @@
-package com.prajwal.prajwalwaingankar_cavista.model;
+package com.ashwin.thoughtctl.model;
 
 import java.util.List;
 
-/**
- * Created by Prajwal Waingankar
- * on 25-Aug-20.
- * Github: prajwalmw
- */
 
 
 public class ImageDetails {
     private List<String> imageLink;
     private List<String> imageTitle;
 
-    public ImageDetails(List<String> imageLink, List<String> imageTitle) {
+    public List<String> getImagedataTimeList() {
+        return imagedataTimeList;
+    }
+
+    public void setImagedataTimeList(List<String> imagedataTimeList) {
+        this.imagedataTimeList = imagedataTimeList;
+    }
+
+    private List<String> imagedataTimeList;
+
+    public ImageDetails(List<String> imageLink, List<String> imageTitle,List<String> imagedataTimeList) {
         this.imageLink = imageLink;
         this.imageTitle = imageTitle;
+        this.imagedataTimeList = imagedataTimeList;
     }
 
     public List<String> getImageLink() {

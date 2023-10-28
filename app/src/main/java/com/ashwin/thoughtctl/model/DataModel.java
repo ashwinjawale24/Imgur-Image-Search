@@ -1,15 +1,10 @@
-package com.prajwal.prajwalwaingankar_cavista.model;
+package com.ashwin.thoughtctl.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by Prajwal Waingankar
- * on 22-Aug-20.
- * Github: prajwalmw
- */
 
 
 public class DataModel {

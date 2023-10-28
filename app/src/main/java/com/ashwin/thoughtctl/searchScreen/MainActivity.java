@@ -1,19 +1,19 @@
-package com.prajwal.prajwalwaingankar_cavista.firstScreen;
+package com.ashwin.thoughtctl.searchScreen;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -23,38 +23,29 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.Toast;
 
-import com.prajwal.prajwalwaingankar_cavista.R;
-import com.prajwal.prajwalwaingankar_cavista.model.ImageDetails;
-import com.prajwal.prajwalwaingankar_cavista.model.SearchResponse;
-import com.prajwal.prajwalwaingankar_cavista.network.API_RequestConnection;
-import com.prajwal.prajwalwaingankar_cavista.network.ApiClient;
-import com.prajwal.prajwalwaingankar_cavista.network.ApiInterface;
-import com.prajwal.prajwalwaingankar_cavista.network.NetworkConnection;
-import com.prajwal.prajwalwaingankar_cavista.secondScreen.KotlinSecondScreen;
-import com.prajwal.prajwalwaingankar_cavista.viewModel.Response_ViewModel;
-
-import org.jetbrains.annotations.NotNull;
+import com.ashwin.thoughtctl.R;
+import com.ashwin.thoughtctl.model.ImageDetails;
+import com.ashwin.thoughtctl.network.API_RequestConnection;
+import com.ashwin.thoughtctl.network.ApiInterface;
+import com.ashwin.thoughtctl.network.NetworkConnection;
+import com.ashwin.thoughtctl.DetailScreen.KotlinSecondScreen;
+import com.ashwin.thoughtctl.viewModel.Response_ViewModel;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
     GridView gridView;
+    ListView listView;
+
     SearchView searchView;
     ApiInterface apiInterface;
-    List<String> imageUrlsList, imageTitleList;
+    List<String> imageUrlsList, imageTitleList,imagedataTimeList;
     Map<String, ImageDetails> stringMap;
     Context context;
     String mquery = "", image_id;
@@ -73,10 +64,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         gridView = findViewById(R.id.gridView);
-       // searchView = findViewById(R.id.searchView);
+        listView = findViewById(R.id.listView);
+
         context = MainActivity.this;
         imageUrlsList = new ArrayList<>();
         imageTitleList = new ArrayList<>();
+        imagedataTimeList = new ArrayList<>();
 
         connection = new API_RequestConnection();
 
@@ -97,11 +90,19 @@ public class MainActivity extends AppCompatActivity {
 
                         //image Titles
                         imageTitleList = Objects.requireNonNull(stringImageDetailsMap.get(mquery)).getImageTitle();
+                        //image data time
+                        imagedataTimeList = Objects.requireNonNull(stringImageDetailsMap.get(mquery)).getImagedataTimeList();
 
                         if (!stringImageDetailsMap.get(mquery).getImageLink().isEmpty()) {
                             //Image Links
                             gridView.setAdapter(new ImageAdapter(context, Objects.requireNonNull
                                     (stringImageDetailsMap.get(mquery)).getImageLink()));
+
+                            listView.setAdapter(new ImageAdapter(context, Objects.requireNonNull
+                                    (stringImageDetailsMap.get(mquery)).getImageLink()));
+
+
+
                         } else {
                             Toast.makeText(context, "No images found! The query is either invalid or doesn't contains images", Toast.LENGTH_LONG).show();
                         }
@@ -111,6 +112,18 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent i = new Intent(getApplicationContext(), KotlinSecondScreen.class);
+                i.putExtra("url", imageUrlsList.get(position));
+                i.putExtra("title", imageTitleList.get(position));
+                i.putExtra("datetime", imagedataTimeList.get(position));
+                Log.d("Title", imageTitleList.get(position));
+                startActivity(i);
+            }
+        });
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -119,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), KotlinSecondScreen.class);
                 i.putExtra("url", imageUrlsList.get(position));
                 i.putExtra("title", imageTitleList.get(position));
+                i.putExtra("datetime", imagedataTimeList.get(position));
                 Log.d("Title", imageTitleList.get(position));
                 startActivity(i);
             }
@@ -169,7 +183,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+
+
         switch (item.getItemId()) {
+
+            case R.id.list:
+                gridView.setVisibility(View.GONE);
+                listView.setVisibility(View.VISIBLE);
+                break;
+
+            case R.id.grid:
+                gridView.setVisibility(View.VISIBLE);
+                listView.setVisibility(View.GONE);
+                break;
+
             case R.id.search_item:
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override

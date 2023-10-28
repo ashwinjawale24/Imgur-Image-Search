@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.prajwal.prajwalwaingankar_cavista">
+    package="com.ashwin.thoughtctl">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -14,11 +14,12 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".secondScreen.KotlinSecondScreen"
+            android:name="com.ashwin.thoughtctl.DetailScreen.KotlinSecondScreen"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
-        <activity android:name=".firstScreen.MainActivity">
+        <activity android:name="com.ashwin.thoughtctl.searchScreen.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

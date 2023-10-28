@@ -1,15 +1,11 @@
-package com.prajwal.prajwalwaingankar_cavista.network;
+package com.ashwin.thoughtctl.network;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.GridView;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.prajwal.prajwalwaingankar_cavista.firstScreen.ImageAdapter;
-import com.prajwal.prajwalwaingankar_cavista.model.ImageDetails;
-import com.prajwal.prajwalwaingankar_cavista.model.SearchResponse;
+import com.ashwin.thoughtctl.model.ImageDetails;
+import com.ashwin.thoughtctl.model.SearchResponse;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,17 +19,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by Prajwal Waingankar
- * on 23-Aug-20.
- * Github: prajwalmw
- */
-
 
 public class API_RequestConnection {
     MutableLiveData<Map<String, ImageDetails>> mutableLiveData;
     ApiInterface apiInterface;
-    List<String> imageUrlsList, imagetitleList;
+    List<String> imageUrlsList, imagetitleList, imagedataTimeList;
     ImageDetails details;
     Map<String, ImageDetails> stringMap;
 
@@ -49,7 +39,7 @@ public class API_RequestConnection {
 
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         final Observable<SearchResponse> observable =
-                apiInterface.getSearchImages(query, "Client-ID 137cda6b5008a7c");
+                apiInterface.getSearchImages(query, "Client-ID c6b083c91056f1a");
         observable
                 .debounce(250, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
@@ -57,11 +47,14 @@ public class API_RequestConnection {
                 .subscribe(new DisposableObserver<SearchResponse>() {
                     @Override
                     public void onNext(SearchResponse searchResponse) {
-//                            Log.d("praj", searchResponse.getData().get(0).getTitle());
+                            //Log.d("logdatetime", String.valueOf(searchResponse));
                         imageUrlsList = new ArrayList<>();
                         imagetitleList = new ArrayList<>();
+                        imagedataTimeList = new ArrayList<>();
+
                         stringMap = new HashMap<>();
-                        details = new ImageDetails(imageUrlsList, imagetitleList);
+
+                        details = new ImageDetails(imageUrlsList, imagetitleList,imagedataTimeList);
 
                         for (int i = 0; i < searchResponse.getData().size(); i++) {
                             if ((searchResponse.getData().get(i).getImages() != null)) {
@@ -76,20 +69,26 @@ public class API_RequestConnection {
                                                     .getImages().get(j).getLink());
                                             imagetitleList.add(i, searchResponse.getData().get(i)
                                                     .getTitle());
+                                            imagedataTimeList.add(i, String.valueOf(searchResponse.getData().get(i)
+                                                    .getDatetime()));
+                                            
                                         } else {
                                             imageUrlsList.add(i, searchResponse.getData().get(i)
                                                     .getImages().get(j).getLink());
                                             imagetitleList.add(i, "No title");
+                                            imagedataTimeList.add(i, "No Data");
                                         }
 
                                     } else {
                                         imageUrlsList.add(i, "empty");
                                         imagetitleList.add(i, "empty");
+                                        imagedataTimeList.add(i, "empty");
                                     }
                                 }
                             } else {
                                 imageUrlsList.add(i, "empty");
                                 imagetitleList.add(i, "empty");
+                                imagedataTimeList.add(i, "empty");
                             }
 
                         }
@@ -97,11 +96,12 @@ public class API_RequestConnection {
 
                         imageUrlsList.removeAll(Collections.singleton("empty"));
                         imagetitleList.removeAll(Collections.singleton("empty"));
-                        stringMap.put(query, new ImageDetails(imageUrlsList, imagetitleList));
+                        imagedataTimeList.removeAll(Collections.singleton("empty"));
+                        stringMap.put(query, new ImageDetails(imageUrlsList, imagetitleList,imagedataTimeList));
 
                         mutableLiveData.setValue(stringMap);
 
-                        Log.d("praj31", String.valueOf(imageUrlsList.size()));
+                        Log.d("lgSize", String.valueOf(imageUrlsList.size()));
                     }
 
                     @Override

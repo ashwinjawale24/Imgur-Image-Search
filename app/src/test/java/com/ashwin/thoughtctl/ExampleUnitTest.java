@@ -1,4 +1,4 @@
-package com.prajwal.prajwalwaingankar_cavista;
+package com.ashwin.thoughtctl;
 
 import org.junit.Test;
 

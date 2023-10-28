@@ -1,16 +1,10 @@
-package com.prajwal.prajwalwaingankar_cavista.network;
+package com.ashwin.thoughtctl.network;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-/**
- * Created by Prajwal Waingankar
- * on 22-Aug-20.
- * Github: prajwalmw
- */
 
 
 public class ApiClient {
